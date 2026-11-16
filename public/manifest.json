@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Meetkeep — Google Meet recorder",
+  "description": "Record Google Meet or any website tab locally. English transcripts, SRT subtitles, and video downloads.",
+  "version": "1.4.0",
+  "minimum_chrome_version": "116",
+  "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
+  "permissions": ["activeTab", "tabCapture", "offscreen", "storage", "downloads", "unlimitedStorage"],
+  "host_permissions": ["https://meet.google.com/*"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": { "default_popup": "popup.html", "default_title": "Meetkeep", "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png" } },
+  "options_page": "library.html",
+  "content_scripts": [
+    { "matches": ["https://meet.google.com/*"], "js": ["content.js"], "run_at": "document_idle" }
+  ],
+  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'self'" }
+}
